@@ -13,3 +13,9 @@ class Book:
         self.id = id
         self.title = title
         self.description = description
+
+books = [
+    Book(1, "Kitchen", "A novel about loss and kitchens."),
+    Book(2, "Letters to a Young Poet", "A series of letters from Rilke"),
+    Book(3, "The Catcher in the Rye", "A novel about a teenage boy in NYC")
+]
