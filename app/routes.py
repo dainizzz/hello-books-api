@@ -16,8 +16,13 @@ def create_book():
     return make_response(f"Book {new_book.title} successfully created", 201)
 
 @books_bp.route("", methods=["GET"])
-def handle_books():
-    books = Book.query.all()
+def get_all_books():
+    title_query = request.args.get("title")
+    if title_query:
+        books = Book.query.filter_by(title=title_query)
+    else:
+        books = Book.query.all()
+
     books_response = []
     for book in books:
         books_response.append({
@@ -25,6 +30,7 @@ def handle_books():
             "title": book.title,
             "description": book.description
         })
+    # NOTE: The below code returns an empty list if the book title doesn't exist
     return jsonify(books_response)
 
 @books_bp.route("/<book_id>", methods=["GET"])
